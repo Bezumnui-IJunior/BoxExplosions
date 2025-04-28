@@ -51,7 +51,7 @@ public class CubeRaycaster : MonoBehaviour
                 origin.ExplosionForce,
                 origin.transform.position,
                 origin.ExplosionRadius,
-                0,
+                origin.ExplosionUpFactor,
                 ForceMode.Impulse
             );
         }

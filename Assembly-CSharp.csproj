@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\ColorChanger.cs" />
     <Compile Include="Assets\Scripts\CubeRaycaster.cs" />
+    <Compile Include="Assets\Scripts\CubeExploder.cs" />
     <Compile Include="Assets\Scripts\CubeSpawner.cs" />
     <Compile Include="Assets\Scripts\ScaleChanger.cs" />
     <Compile Include="Assets\Scripts\Cube.cs" />

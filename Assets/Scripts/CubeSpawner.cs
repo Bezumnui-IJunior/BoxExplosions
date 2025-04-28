@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class CubeSpawner : MonoBehaviour
 {
     [SerializeField, Min(0)] private int _minInstances;
-    [SerializeField] private int _maxInstances;
-    [SerializeField] private float _range;
-    [SerializeField] private float _probabilityMultiplier = 0.5f;
+    [SerializeField, Min(0)] private int _maxInstances;
+    [SerializeField, Min(0)] private float _spawnRadius;
+    [SerializeField, Min(0)] private float _probabilityMultiplier = 0.5f;
+    [SerializeField, Min(0)] private float _forceMultiplier = 1.5f;
+    [SerializeField, Min(0)] private float _rangeMultiplier = 1.5f;
 
     private ColorChanger _colorChanger;
     private ScaleChanger _scaleChanger;
@@ -25,22 +25,29 @@ public class CubeSpawner : MonoBehaviour
         _scaleChanger = new();
     }
 
-    public List<Cube> SpawnNextGeneration(Cube original)
+    public void SpawnNextGeneration(Cube original)
     {
         int count = Random.Range(_minInstances, _maxInstances + 1);
-        List<Cube> cubes = new();
 
         for (int i = 0; i < count; i++)
         {
             Cube cube = Instantiate(original);
-            cube.transform.position += new Vector3(Random.Range(-_range, _range), 0, Random.Range(-_range, _range));
-            cube.name = gameObject.name;
-            cube.Init(original.ReproductionProbability * _probabilityMultiplier);
+
+            cube.transform.position += new Vector3(RandomizeRadius(), 0, RandomizeRadius());
+            cube.name = original.name;
+
+            cube.Init(
+                original.ReproductionProbability * _probabilityMultiplier,
+                cube.ExplosionForce * _forceMultiplier,
+                cube.ExplosionRadius * _rangeMultiplier
+            );
             _colorChanger.SetRandomColor(cube.Material);
             _scaleChanger.ChangeScale(cube.transform);
-            cubes.Add(cube);
         }
+    }
 
-        return cubes;
+    private float RandomizeRadius()
+    {
+        return Random.Range(-_spawnRadius, _spawnRadius);
     }
 }

@@ -1,19 +1,18 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(MeshRenderer))]
 public class Cube : MonoBehaviour
 {
-    [SerializeField] private float _reproductionProbability = 1f;
-    [SerializeField] private float _explosionRadius = 1f;
-    [SerializeField] private float _explosionForce = 1f;
-    [SerializeField] private float _explosionUpFactor = 1f;
-    
+    [SerializeField, Min(0)] private float _reproductionProbability = 1f;
+    [SerializeField, Min(0)] private float _explosionRadius = 1f;
+    [SerializeField, Min(0)] private float _explosionForce = 1f;
+    [SerializeField, Min(0)] private float _explosionUpFactor = 1f;
+
     private MeshRenderer _meshRenderer;
     private bool _isInit;
-    
+
     public float ReproductionProbability => _reproductionProbability;
     public float ExplosionRadius => _explosionRadius;
     public float ExplosionForce => _explosionForce;
@@ -26,16 +25,17 @@ public class Cube : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody>();
         _meshRenderer = GetComponent<MeshRenderer>();
     }
-    
+
     public bool ShouldReproduce() => Random.value < _reproductionProbability;
 
-
-    public void Init(float reproductionProbability)
+    public void Init(float reproductionProbability, float explosionForce, float explosionRadius)
     {
         if (_isInit)
             return;
 
         _reproductionProbability = reproductionProbability;
+        _explosionForce = explosionForce;
+        _explosionRadius = explosionRadius;
         _isInit = true;
     }
 

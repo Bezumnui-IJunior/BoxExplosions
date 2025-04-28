@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(CubeSpawner))]
+[RequireComponent(typeof(CubeExploder))]
 public class CubeRaycaster : MonoBehaviour
 {
     private CubeSpawner _cubeSpawner;
+    private CubeExploder _cubeExploder;
 
     private readonly float _maxDistance = 100;
     private Camera _camera;
@@ -15,6 +14,7 @@ public class CubeRaycaster : MonoBehaviour
     {
         _camera = Camera.main;
         _cubeSpawner = GetComponent<CubeSpawner>();
+        _cubeExploder = GetComponent<CubeExploder>();
     }
 
     private void Update()
@@ -33,29 +33,11 @@ public class CubeRaycaster : MonoBehaviour
         if (origin.ShouldReproduce() == false)
         {
             origin.Destroy();
+            _cubeExploder.Explode(origin);
 
             return;
         }
 
-        List<Cube> cubes = _cubeSpawner.SpawnNextGeneration(origin);
-        StartCoroutine(Explode(origin, cubes));
-    }
-
-    private IEnumerator Explode(Cube origin, List<Cube> cubes)
-    {
-        yield return new WaitForFixedUpdate();
-
-        foreach (Cube cube in cubes)
-        {
-            cube.Rigidbody.AddExplosionForce(
-                origin.ExplosionForce,
-                origin.transform.position,
-                origin.ExplosionRadius,
-                origin.ExplosionUpFactor,
-                ForceMode.Impulse
-            );
-        }
-
-        origin.Destroy();
+        _cubeSpawner.SpawnNextGeneration(origin);
     }
 }

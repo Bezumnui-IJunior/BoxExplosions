@@ -9,10 +9,9 @@ public class CubeSpawner : MonoBehaviour
     [SerializeField] private int _maxInstances;
     [SerializeField] private float _range;
     [SerializeField] private float _probabilityMultiplier = 0.5f;
-    
+
     private ColorChanger _colorChanger;
     private ScaleChanger _scaleChanger;
-
 
     private void OnValidate()
     {

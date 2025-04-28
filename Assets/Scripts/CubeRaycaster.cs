@@ -30,7 +30,7 @@ public class CubeRaycaster : MonoBehaviour
         if (hit.transform.gameObject.TryGetComponent(out Cube origin) == false)
             return;
 
-        if (origin.ShouldReproduce == false)
+        if (origin.ShouldReproduce() == false)
         {
             origin.Destroy();
 

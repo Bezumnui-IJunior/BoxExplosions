@@ -20,15 +20,17 @@ public class Cube : MonoBehaviour
     public float ExplosionUpFactor => _explosionUpFactor;
     public Rigidbody Rigidbody { get; private set; }
     public Material Material => _meshRenderer.material;
-    public bool ShouldReproduce => Random.value < _reproductionProbability;
 
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
         _meshRenderer = GetComponent<MeshRenderer>();
     }
+    
+    public bool ShouldReproduce() => Random.value < _reproductionProbability;
 
-    public void Construct(float reproductionProbability)
+
+    public void Init(float reproductionProbability)
     {
         if (_isInit)
             return;

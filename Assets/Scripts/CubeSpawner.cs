@@ -28,7 +28,7 @@ public class CubeSpawner : MonoBehaviour
 
     public List<Cube> SpawnNextGeneration(Cube original)
     {
-        int count = Random.Range(_minInstances, _maxInstances);
+        int count = Random.Range(_minInstances, _maxInstances + 1);
         List<Cube> cubes = new();
 
         for (int i = 0; i < count; i++)
@@ -36,7 +36,7 @@ public class CubeSpawner : MonoBehaviour
             Cube cube = Instantiate(original);
             cube.transform.position += new Vector3(Random.Range(-_range, _range), 0, Random.Range(-_range, _range));
             cube.name = gameObject.name;
-            cube.Construct(original.ReproductionProbability * _probabilityMultiplier);
+            cube.Init(original.ReproductionProbability * _probabilityMultiplier);
             _colorChanger.SetRandomColor(cube.Material);
             _scaleChanger.ChangeScale(cube.transform);
             cubes.Add(cube);

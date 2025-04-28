@@ -6,9 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(CubeSpawner))]
 public class CubeRaycaster : MonoBehaviour
 {
-    private CubeSpawner _cubeSpawner;
-
     private readonly float _maxDistance = 100;
+
+    private CubeSpawner _cubeSpawner;
     private Camera _camera;
 
     private void Awake()
@@ -51,7 +51,7 @@ public class CubeRaycaster : MonoBehaviour
                 origin.ExplosionForce,
                 origin.transform.position,
                 origin.ExplosionRadius,
-                origin.ExplosionUpFactor,
+                0,
                 ForceMode.Impulse
             );
         }

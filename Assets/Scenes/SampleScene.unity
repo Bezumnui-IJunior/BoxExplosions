@@ -192,6 +192,10 @@ PrefabInstance:
       value: Cube
       objectReference: {fileID: 0}
     - target: {fileID: 5710618501492732541, guid: e23abfbcaa02d724bbfe463d26cda2ea, type: 3}
+      propertyPath: _explosionForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5710618501492732541, guid: e23abfbcaa02d724bbfe463d26cda2ea, type: 3}
       propertyPath: _explosionRadius
       value: 15
       objectReference: {fileID: 0}
@@ -744,6 +748,7 @@ GameObject:
   - component: {fileID: 1285466945}
   - component: {fileID: 1285466944}
   - component: {fileID: 1285466943}
+  - component: {fileID: 1285466946}
   m_Layer: 0
   m_Name: Raycaster
   m_TagString: Untagged
@@ -794,6 +799,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1285466946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285466942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a670343b5cbf4445b15a433d7aa640b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxColliders: 100
 --- !u!1 &1707587021
 GameObject:
   m_ObjectHideFlags: 0
